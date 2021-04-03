@@ -4,7 +4,7 @@ import s from './Navbar.module.css';
 
 const Navbar = (props) => {
     let friendsElements = props.sidebar.friends
-        .map(f => <Friend friend={f} />)
+        .map(f => <Friend key={f.id} friend={f} />)
 
     return (
         <nav className={s.nav}>

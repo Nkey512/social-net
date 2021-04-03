@@ -3,12 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 let initialState = {
-    users: [
-        {id: 1, followed: false, fullName: 'Nikita', status: 'Coding...', location: {country: 'Russia', city: 'SPb'}},
-        {id: 2, followed: true, fullName: 'Dimon', status: 'Making sueta!', location: {country: 'Russia', city: 'Tver'}},
-        {id: 3, followed: false, fullName: 'Mikola', status: 'Eating SALO!', location: {country: 'Ukraine', city: 'Kiev'}},
-        {id: 4, followed: true, fullName: 'Kiska', status: 'Meow', location: {country: 'Russia', city: 'Moscow'}},
-    ],
+    users: [],
 }
 
 const usersReducer = (statePart = initialState, action) => {
@@ -18,7 +13,7 @@ const usersReducer = (statePart = initialState, action) => {
             return {
                 ...statePart,
                 users: statePart.users.map(
-                    callbackfn = u => {
+                    u => {
                         if (u.id === action.userId) {
                             return {...u, followed: true}
                         }
@@ -30,7 +25,7 @@ const usersReducer = (statePart = initialState, action) => {
             return {
                 ...statePart,
                 users: statePart.users.map(
-                    callbackfn = u => {
+                    u => {
                         if (u.id === action.userId) {
                             return {...u, followed: false}
                         }
@@ -39,7 +34,7 @@ const usersReducer = (statePart = initialState, action) => {
                 )
             }
         case SET_USERS:
-            return {...statePart, users: [...statePart.user, ...action.users]}
+            return {...statePart, users: [...statePart.users, ...action.users]}
         default:
             return statePart;
     }
