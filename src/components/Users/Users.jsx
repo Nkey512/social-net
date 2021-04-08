@@ -1,5 +1,6 @@
 import s from './Users.module.css';
 import defaultUserIcon from './../../assets/images/defaultUserIcon.png'
+import { NavLink } from 'react-router-dom';
 
 let Users = (props) => {
 
@@ -10,14 +11,14 @@ let Users = (props) => {
         pages.push(i);
     }
 
-
     return (
         <div>
             <div>
                 {pages.map(p => {
                     return (
                         <span key={p}
-                            className={props.currentPage === p ? s.selectedPage : ''}
+                            className={props.currentPage === p
+                                ? s.selectedPage : ''}
                             onClick={() => { props.onPageChanged(p) }}>
                             {p}
                         </span>
@@ -29,13 +30,22 @@ let Users = (props) => {
                     u => <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photos.small != null ? u.photos.small : defaultUserIcon} className={s.userPhoto} />
+                                <NavLink to={'/profile/' + u.id}>
+                                    <img src={u.photos.small != null
+                                        ? u.photos.small
+                                        : defaultUserIcon}
+                                        className={s.userPhoto} />
+                                </NavLink>
                             </div>
                             <div>
                                 {
                                     u.followed
-                                        ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
-                                        : <button onClick={() => { props.follow(u.id) }}>Follow</button>
+                                        ? <button onClick={() => {props.unfollow(u.id)}}>
+                                            Unfollow
+                                        </button>
+                                        : <button onClick={() => {props.follow(u.id)}}>
+                                            Follow
+                                        </button>
                                 }
                             </div>
                         </span>
