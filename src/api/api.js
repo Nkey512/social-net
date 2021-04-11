@@ -9,3 +9,13 @@ export const getUsers = (currentPage = 1, pageSize = 10) => {
         return response.data;
     });
 }
+
+export const checkAuth = () => {
+    return axios.get(
+        `https://social-network.samuraijs.com/api/1.0/auth/me`,
+        {withCredentials: true}
+    )
+    .then(response => {
+        return response.data;
+    });
+}
