@@ -1,7 +1,7 @@
 import s from './Users.module.css';
 import defaultUserIcon from './../../assets/images/defaultUserIcon.png'
 import { NavLink } from 'react-router-dom';
-import { followRequest, unfollowRequest } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 let Users = (props) => {
 
@@ -42,7 +42,7 @@ let Users = (props) => {
                                 {
                                     u.followed
                                         ? <button onClick={() => {
-                                            unfollowRequest(u.id).then(data => {
+                                            usersAPI.unfollowRequest(u.id).then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
@@ -51,7 +51,7 @@ let Users = (props) => {
                                             Unfollow
                                         </button>
                                         : <button onClick={() => {
-                                            followRequest(u.id).then(data => {
+                                            usersAPI.followRequest(u.id).then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
