@@ -11,10 +11,10 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(true);
 
         getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
+        });
     }
 
     onPageChanged = (pageNumber) => {
@@ -31,7 +31,7 @@ class UsersContainer extends React.Component {
         return (
             <>
                 { this.props.isFetching ?
-                    <Preloader /> : null }
+                    <Preloader /> : null}
                 <Users
                     totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
@@ -54,6 +54,7 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
+
 let actions = {
     follow,
     unfollow,
