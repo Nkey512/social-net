@@ -57,7 +57,7 @@ const usersReducer = (statePart = initialState, action) => {
                 ...statePart,
                 followingInProgress: action.isInProgress
                     ? [...statePart.followingInProgress, action.userId]
-                    : statePart.followingInProgress.filter(id => id != action.userId)
+                    : statePart.followingInProgress.filter(id => id !== action.userId)
             }
         default:
             return statePart;
@@ -72,7 +72,8 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleFollowingProgress = (isInProgress, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isInProgress, userId })
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+// thunkCreators
+export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
 
         dispatch(toggleIsFetching(true));
