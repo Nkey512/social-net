@@ -10,7 +10,7 @@ const instance = axios.create(
     }
 )
 
-export const API = {
+export const usersAPI = {
 
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(
@@ -39,15 +39,6 @@ export const API = {
             });
     },
 
-    checkAuth() {
-        return instance.get(
-            'auth/me',
-        )
-            .then(response => {
-                return response.data;
-            });
-    },
-
     getProfile(userId) {
         return instance.get(
             `profile/${userId}`
@@ -56,4 +47,15 @@ export const API = {
                 return response.data;
             });
     }
+}
+
+export const authAPI = {
+    checkAuth() {
+        return instance.get(
+            'auth/me',
+        )
+            .then(response => {
+                return response.data;
+            });
+    },
 }

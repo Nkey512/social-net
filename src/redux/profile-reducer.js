@@ -1,4 +1,4 @@
-import { API } from "../api/api"
+import { usersAPI } from "../api/api"
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
@@ -49,8 +49,9 @@ export const updateNewPostTextActionCreator = (text) => ({
 })
 export const setUserProfile = (profile) => ( {type: SET_USER_PROFILE, profile} )
 
+// thunkCreators
 export const getUserProfile = (userId) => (dispatch) => {
-    API.getProfile(userId).then(data => {
+    usersAPI.getProfile(userId).then(data => {
         dispatch(setUserProfile(data));
     });
 }
