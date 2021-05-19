@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { checkForAuth } from '../../redux/auth-reducer';
+import { getAuthUserData, logout } from '../../redux/auth-reducer';
 
 
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        this.props.checkForAuth();
+        this.props.getAuthUserData();
     }
 
     render() {
@@ -23,7 +23,8 @@ const mapStateToProps = (state) => {
 };
 
 let actions = {
-    checkForAuth
+    getAuthUserData,
+    logout
 }
 
 export default connect(mapStateToProps, actions)(HeaderContainer);

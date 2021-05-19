@@ -1,4 +1,7 @@
+import { connect } from "react-redux";
+import { Redirect } from "react-router";
 import { Field, reduxForm } from "redux-form"
+import { login } from "../../redux/auth-reducer";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
 import { Input } from "../common/FormsControls/FormsControls";
 
@@ -10,8 +13,8 @@ const LoginForm = (props) => {
             <div>
                 <Field
                     component={Input}
-                    name="login"
-                    placeholder="Login"
+                    name="email"
+                    placeholder="Email"
                     validate={[required, maxLength30]} />
             </div>
             <div>
@@ -19,6 +22,7 @@ const LoginForm = (props) => {
                     component={Input}
                     name="password"
                     placeholder="Password"
+                    type="password"
                     validate={[required, maxLength30]} />
             </div>
             <div>
@@ -41,7 +45,11 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData);
+        props.login(formData.email, formData.password, formData.rememberMe);
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'} />
     }
 
     return (
@@ -52,4 +60,14 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+const actions = {
+    login
+}
+
+export default connect(mapStateToProps, actions)(Login);
