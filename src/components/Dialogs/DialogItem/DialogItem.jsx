@@ -1,12 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import s from './../Dialogs.module.css'
+import { NavLink } from "react-router-dom";
+import s from "./../Dialogs.module.css";
 
 const DialogItem = (props) => {
-
-    let path = "/dialogs/" + props.id
+    let path = "/dialogs/" + props.id;
 
     return (
-        <div className={s.dialog + ' ' + s.active}>
+        <div className={s.dialog + " " + s.active}>
             <div>
                 <img src={props.avatar} />
             </div>
@@ -14,7 +13,7 @@ const DialogItem = (props) => {
                 {props.name}
             </NavLink>
         </div>
-    )
-}
+    );
+};
 
 export default DialogItem;

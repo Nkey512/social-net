@@ -1,14 +1,14 @@
-import { connect } from 'react-redux';
-import Navbar from './Navbar';
+import { connect } from "react-redux";
+import Navbar from "./Navbar";
 
 let mapStateToProps = (state) => {
     return {
-        sidebar: state.sidebar
-    }
-}
+        sidebar: state.sidebar,
+    };
+};
 let mapDispatchToProps = (dispatch) => {
-    return {}
-}
+    return {};
+};
 
 const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
 

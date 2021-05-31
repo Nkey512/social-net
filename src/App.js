@@ -1,40 +1,55 @@
-import './App.css';
-import DialogsContainer from './components/Dialogs/DialogsContainer'
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
-import { Route } from 'react-router';
-import NavbarContainer from './components/Navbar/NavbarContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
+import "./App.css";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import News from "./components/News/News";
+import Music from "./components/Music/Music";
+import Settings from "./components/Settings/Settings";
+import { Route, withRouter } from "react-router";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
+import React from "react";
+import { getAuthUserData } from "./redux/auth-reducer";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-const App = (props) => {
-    return (
-        <div className='app-wrapper'>
-            <HeaderContainer />
-            <NavbarContainer />
-            <div className='app-wrapper-content'>
+class App extends React.Component {
+    componentDidMount() {
+        this.props.getAuthUserData();
+    }
 
-                <Route path='/login'
-                    render={() => <Login />} />
+    render() {
+        return (
+            <div className="app-wrapper">
+                <HeaderContainer />
+                <NavbarContainer />
+                <div className="app-wrapper-content">
+                    <Route path="/login" render={() => <Login />} />
 
-                <Route path='/profile/:userId?'
-                    render={() => <ProfileContainer />} />
+                    <Route
+                        path="/profile/:userId?"
+                        render={() => <ProfileContainer />}
+                    />
 
-                <Route path='/dialogs'
-                    render={() => <DialogsContainer />} />
+                    <Route
+                        path="/dialogs"
+                        render={() => <DialogsContainer />}
+                    />
 
-                <Route path='/users'
-                    render={() => <UsersContainer />} />
+                    <Route path="/users" render={() => <UsersContainer />} />
 
-                <Route path='/news' render={News} />
-                <Route path='/music' render={Music} />
-                <Route path='/settings' render={Settings} />
+                    <Route path="/news" render={News} />
+                    <Route path="/music" render={Music} />
+                    <Route path="/settings" render={Settings} />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default App;
+let actions = {
+    getAuthUserData,
+};
+
+export default compose(withRouter, connect(null, actions))(App);

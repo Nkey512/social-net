@@ -1,21 +1,18 @@
 import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_INITIALIZED = "SET_INITIALIZED";
 
 let initialState = {
-    userId: null,
-    email: null,
-    login: null,
-    isAuth: false,
+    initialized: false,
 };
 
-const authReducer = (statePart = initialState, action) => {
+const appReducer = (statePart = initialState, action) => {
     switch (action.type) {
-        case SET_USER_DATA:
+        case SET_INITIALIZED:
             return {
                 ...statePart,
-                ...action.payload,
+                initialized: action.initialized,
             };
         default:
             return statePart;
